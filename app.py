@@ -1,5 +1,6 @@
 from flask import Flask,render_template
 import requests
+import random
 from numerize.numerize import numerize
 import pprint
 app= Flask(__name__)
@@ -35,6 +36,9 @@ RANDOM_CHANNEL_NAMES =[
 'Prism',
 'Flax',
 'Nostalgia']
+# channel_name= ""
+# for i in range(len(RANDOM_CHANNEL_NAMES)):
+#     channel_name=random.choice(RANDOM_CHANNEL_NAMES)
 @app.route('/')
 def index():
     url = "https://youtube138.p.rapidapi.com/channel/videos/"
@@ -53,7 +57,6 @@ def index():
     
     # return jsonify(videos) #--> import Jsonify in flask
     return render_template('index.html', videos=videos)
-
 @app.template_filter()
 def numberize(views):
   return numerize(views, 1)
